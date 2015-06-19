@@ -59,6 +59,7 @@ namespace NoMoreSusi.Data.Migrations
 
 		private void SeedRooms(NoMoreSusiDbContext context)
 		{
+			//just to check
 		}
 	}
 }

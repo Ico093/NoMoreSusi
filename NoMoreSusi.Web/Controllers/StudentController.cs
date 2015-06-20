@@ -78,7 +78,7 @@ namespace NoMoreSusi.Web.Controllers
             var studentModel = Data.Students.GetById(id);
             var viewModel = Mapper.Map<EditStudentViewModel>(studentModel);
 
-            viewModel.Courses.Find(c => c.Text == viewModel.Course).Selected = true;
+            viewModel.Courses[2].Selected = true;
 
             return View(viewModel);
         }
@@ -87,8 +87,6 @@ namespace NoMoreSusi.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(EditStudentViewModel viewModel)
         {
-            viewModel.Courses.Find(c => c.Text == viewModel.Course).Selected = true;
-
             if (ModelState.IsValid)
             {
                 var studentModel = Mapper.Map<Student>(viewModel);

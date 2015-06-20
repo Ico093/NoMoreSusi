@@ -5,7 +5,9 @@
 @using (Html.BeginForm("Edit", "Student", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-    
+
+    @Html.HiddenFor(s => s.UserId)
+
     <div>
         @Html.DisplayNameFor(s => s.Name)
         @Html.EditorFor(s => s.Name)
@@ -13,7 +15,19 @@
 
     <div>
         @Html.DisplayNameFor(s => s.Course)
-        @Html.DropDownListFor(s => s.Course, Model.Courses)
+        <select name="Course">
+            @foreach (var course in Model.Courses)
+            {
+                if (course.Text == Model.Course)
+                {
+                    <option value="@course.Value" selected="selected">@course.Text</option>
+                }
+                else
+                {
+                    <option value="@course.Value">@course.Text</option>
+                }
+            }
+        </select>
     </div>
 
     <div>

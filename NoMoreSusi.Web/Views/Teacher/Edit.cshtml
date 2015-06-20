@@ -5,6 +5,7 @@
 @using (Html.BeginForm("Edit", "Teacher", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
+    @Html.HiddenFor(s => s.UserId)
 
     <div>
         @Html.DisplayNameFor(s => s.Name)

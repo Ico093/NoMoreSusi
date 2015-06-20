@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web.Mvc;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Microsoft.AspNet.Identity;
 using NoMoreSusi.Common;
 using NoMoreSusi.Data.Interfaces;
 using NoMoreSusi.Models;
@@ -18,6 +19,7 @@ namespace NoMoreSusi.Web.Controllers
 		{
 		}
 
+		[Authorize(Roles = GlobalConstants.AdminRoleName + "," + GlobalConstants.TeacherRoleName + "," + GlobalConstants.StudentRoleName)]
 		public ActionResult All()
 		{
 			var viewmodel = Data.Lectures
@@ -30,18 +32,16 @@ namespace NoMoreSusi.Web.Controllers
 		}
 
 		[HttpGet]
-		[Authorize(Roles = GlobalConstants.AdminRoleName)]
+		[Authorize(Roles = GlobalConstants.TeacherRoleName)]
 		public ActionResult Add()
 		{
 			var viewmodel = new AddLectureForPageViewModel()
 			{
-				AddLectureViewModel = new AddLectureViewModel()
-				{
-				},
+				AddLectureViewModel = new AddLectureViewModel(),
 				Dates = Enum.GetValues(typeof(DayOfWeek)).Cast<DayOfWeek>(),
 				Courses = Enum.GetValues(typeof(Course)).Cast<Course>(),
 				Facultities = Enum.GetValues(typeof(Facultity)).Cast<Facultity>(),
-				Rooms = Data.Rooms.All().Where(r=>r.Facultity==(Facultity)1).Project().To<RoomViewModel>().ToList()
+				Rooms = Data.Rooms.All().Where(r => r.Facultity == (Facultity)1).Project().To<RoomViewModel>().ToList()
 			};
 
 			return View(viewmodel);
@@ -49,12 +49,16 @@ namespace NoMoreSusi.Web.Controllers
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		[Authorize(Roles = GlobalConstants.AdminRoleName)]
+		[Authorize(Roles = GlobalConstants.TeacherRoleName)]
 		public ActionResult Add(AddLectureViewModel viewmodel)
 		{
 			if (ModelState.IsValid && viewmodel != null)
 			{
 				var model = Mapper.Map<Lecture>(viewmodel);
+
+				var teacher = Data.Teachers.All().FirstOrDefault(t => t.UserId == User.Identity.GetUserId());
+
+				model.TeacherId = teacher.Id;
 
 				Data.Lectures.Add(model);
 				Data.SaveChanges();
@@ -65,11 +69,12 @@ namespace NoMoreSusi.Web.Controllers
 			return View(viewmodel);
 		}
 
+		[Authorize(Roles = GlobalConstants.TeacherRoleName)]
 		public JsonResult RoomsForFacultity(int id)
 		{
 			var viewmodel = Data.Rooms
 				.All()
-				.Where(r => r.Facultity == (Facultity) id)
+				.Where(r => r.Facultity == (Facultity)id)
 				.Project()
 				.To<RoomViewModel>()
 				.ToList();
@@ -82,24 +87,30 @@ namespace NoMoreSusi.Web.Controllers
 		}
 
 		[HttpGet]
-		[Authorize(Roles = GlobalConstants.AdminRoleName)]
+		[Authorize(Roles = GlobalConstants.AdminRoleName + "," + GlobalConstants.TeacherRoleName)]
 		public ActionResult Edit(int id)
 		{
-			var viewmodel = Mapper.Map<EditRoomViewModel>(this.Data.Rooms.GetById(id));
+			var viewmodel = new EditLectureForPageViewModel()
+			{
+				EditLectureViewModel = Mapper.Map<EditLectureViewModel>(this.Data.Lectures.GetById(id)),
+				Dates = Enum.GetValues(typeof(DayOfWeek)).Cast<DayOfWeek>(),
+				Facultities = Enum.GetValues(typeof(Facultity)).Cast<Facultity>(),
+				Rooms = Data.Rooms.All().Where(r => r.Facultity == (Facultity)1).Project().To<RoomViewModel>().ToList()
+			};
 
 			return View(viewmodel);
 		}
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		[Authorize(Roles = GlobalConstants.AdminRoleName)]
-		public ActionResult Edit(EditRoomViewModel viewmodel)
+		[Authorize(Roles = GlobalConstants.AdminRoleName + "," + GlobalConstants.TeacherRoleName)]
+		public ActionResult Edit(EditLectureViewModel viewmodel)
 		{
 			if (ModelState.IsValid && viewmodel != null)
 			{
-				var model = Mapper.Map<Room>(viewmodel);
+				var model = Mapper.Map<Lecture>(viewmodel);
 
-				Data.Rooms.Update(model);
+				Data.Lectures.Update(model);
 				Data.SaveChanges();
 
 				return RedirectToAction("All");

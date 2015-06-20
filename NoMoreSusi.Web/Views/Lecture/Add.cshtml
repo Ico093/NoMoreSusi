@@ -7,18 +7,15 @@
 <h2>@ViewBag.Title</h2>
 
 <div class="row">
-	@using (Html.BeginForm("Add", "Lecture", FormMethod.Post, new {@class = "form-horizontal"}))
+	@using (Html.BeginForm("Add", "Lecture", FormMethod.Post, new { @class = "form-horizontal" }))
 	{
 		@Html.AntiForgeryToken()
-
-		@Html.HiddenFor(m => m.AddLectureViewModel.TeacherId)
-		@Html.HiddenFor(m => m.AddLectureViewModel.RoomId, new{id="hiddenForRoomId"})
 
 		<fieldset>
 			<div class="row form-group">
 				<div class="col-md-6">
 					@Html.LabelFor(m => m.AddLectureViewModel.Name)
-					@Html.EditorFor(m => m.AddLectureViewModel.Name)
+					@Html.EditorFor(m => m.AddLectureViewModel.Name,String.Empty, "Name")
 				</div>
 			</div>
 			<div class="row form-group">
@@ -37,19 +34,19 @@
 			<div class="row form-group">
 				<div class="col-md-6">
 					@Html.LabelFor(m => m.AddLectureViewModel.Hour)
-					@Html.EditorFor(m => m.AddLectureViewModel.Hour)
+					@Html.EditorFor(m => m.AddLectureViewModel.Hour, String.Empty, "Hour")
 				</div>
 			</div>
 			<div class="row form-group">
 				<div class="col-md-6">
 					@Html.LabelFor(m => m.AddLectureViewModel.Length)
-					@Html.EditorFor(m => m.AddLectureViewModel.Length)
+					@Html.EditorFor(m => m.AddLectureViewModel.Length, String.Empty, "Length")
 				</div>
 			</div>
 			<div class="row form-group">
 				<div class="col-md-6">
 					@Html.LabelFor(m => m.AddLectureViewModel.Course)
-					<select>
+					<select name="Course">
 						@foreach (var course in Model.Courses)
 						{
 							<option value="@course">@course.ToString()</option>
@@ -63,8 +60,8 @@
 					<select id="facultities">
 						@foreach (var facultity in Model.Facultities)
 						{
-							var facultityValue = (int) facultity;
-							
+							var facultityValue = (int)facultity;
+
 							<option value="@facultityValue">@facultity</option>
 						}
 					</select>
@@ -73,7 +70,7 @@
 			<div class="row form-group">
 				<div class="col-md-6">
 					@Html.LabelFor(m => m.Rooms)
-					<select id="rooms">
+					<select id="rooms" name="RoomId">
 						@foreach (var room in Model.Rooms)
 						{
 							<option value="@room.Id">@room.Number</option>
@@ -81,8 +78,10 @@
 					</select>
 				</div>
 			</div>
+
+			@Html.SubmitButton("Submit", new { @class = "btn btn-primary" })
 		</fieldset>
-	}Merge
+	}
 </div>
 
 @section scripts
@@ -90,11 +89,6 @@
 	<script>
 		var facultity = $("#facultities");
 		var rooms = $("#rooms");
-		var roomId = $("#hiddenForRoomId");
-
-		function updateRoomId() {
-			roomId.val(rooms.val());
-		}
 
 		function updateRooms() {
 			$.post("RoomsForFacultity/" + facultity.val(), function (data) {
@@ -107,14 +101,9 @@
 
 					rooms.append(option);
 				});
-
-				updateRoomId();
 			});
 		}
 
 		facultity.on("change", updateRooms);
-		rooms.on("change", updateRoomId);
-
-		updateRoomId();
 	</script>
 }

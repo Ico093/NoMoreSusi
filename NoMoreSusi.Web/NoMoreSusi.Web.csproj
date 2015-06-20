@@ -196,6 +196,8 @@
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="ViewModels\Lectures\AddLectureForPageViewModel.cs" />
     <Compile Include="ViewModels\Lectures\AddLectureViewModel.cs" />
+    <Compile Include="ViewModels\Lectures\EditLectureForPageViewModel.cs" />
+    <Compile Include="ViewModels\Lectures\EditLectureViewModel.cs" />
     <Compile Include="ViewModels\Lectures\LectureViewModel.cs" />
     <Compile Include="ViewModels\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -283,6 +285,7 @@
     <Content Include="Views\Student\All.cshtml" />
     <Content Include="Views\Student\Edit.cshtml" />
     <None Include="Views\Lecture\All.cshtml" />
+    <Content Include="Views\Lecture\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Base\" />

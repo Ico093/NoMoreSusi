@@ -34,13 +34,18 @@
 					<p>Day: @currentModel.Day</p>
 					<p>Hour: @currentModel.Hour</p>
 					<p>Length: @currentModel.Length</p>
+					<p>Facultity: @currentModel.Room.Facultity</p>
 					<p>Room: @currentModel.Room.Number</p>
 
 					@using (Html.BeginForm("Delete", "Lecture", new { id = currentModel.Id }, FormMethod.Post, new { id = "deleteRoomForm" }))
 					{
 						@Html.AntiForgeryToken()
 						@Html.ActionLink("Edit", "Edit", "Lecture", new { id = currentModel.Id }, new { @class = "btn btn-primary" })
-						<input id="deleteBtn" type="button" name="name" value="Delete" class="btn btn-danger" />
+						
+						@if (User.IsInRole(GlobalConstants.AdminRoleName))
+						{
+							<input id="deleteBtn" type="button" name="name" value="Delete" class="btn btn-danger" />
+						}
 					}
 				</div>
 			</div>

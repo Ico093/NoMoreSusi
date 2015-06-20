@@ -8,7 +8,7 @@ using NoMoreSusi.Web.ViewModels.Rooms;
 
 namespace NoMoreSusi.Web.Controllers
 {
-	[Authorize(Roles="Administrator")]
+	[Authorize(Roles="Administrator,Teacher")]
 	public class RoomController : BaseController
 	{
 		public RoomController(INoMoreSusiData data)

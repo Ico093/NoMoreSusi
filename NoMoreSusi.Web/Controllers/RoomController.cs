@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using AutoMapper;
 using NoMoreSusi.Data.Interfaces;
 using NoMoreSusi.Models;
@@ -37,6 +38,7 @@ namespace NoMoreSusi.Web.Controllers
 		}
 
 		[HttpPost]
+		[ValidateAntiForgeryTokenAttribute]
 		public ActionResult Add(AddRoomViewModel viewmodel)
 		{
 			if (ModelState.IsValid && viewmodel != null)
@@ -55,13 +57,14 @@ namespace NoMoreSusi.Web.Controllers
 		[HttpGet]
 		public ActionResult Edit(int id)
 		{
-			var viewmodel = Mapper.Map<RoomViewModel>( this.Data.Rooms.GetById(id));
+			var viewmodel = Mapper.Map<EditRoomViewModel>(this.Data.Rooms.GetById(id));
 
 			return View(viewmodel);
 		}
 
 		[HttpPost]
-		public ActionResult Edit(RoomViewModel viewmodel)
+		[ValidateAntiForgeryTokenAttribute]
+		public ActionResult Edit(EditRoomViewModel viewmodel)
 		{
 			if (ModelState.IsValid && viewmodel != null)
 			{
@@ -74,6 +77,16 @@ namespace NoMoreSusi.Web.Controllers
 			}
 
 			return View(viewmodel);
+		}
+
+		[HttpPost]
+		[ValidateAntiForgeryTokenAttribute]
+		public ActionResult Delete(int id)
+		{
+			Data.Rooms.Delete(id);
+			Data.SaveChanges();
+
+			return RedirectToAction("All");
 		}
 	}
 }

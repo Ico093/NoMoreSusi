@@ -10,6 +10,7 @@ namespace NoMoreSusi.Web.Controllers
         {
             
         }
+
         // GET: Student
         public ActionResult Index()
         {

@@ -7,9 +7,9 @@ namespace NoMoreSusi.Data
     public class NoMoreSusiDbContext : IdentityDbContext<User>
     {
         public NoMoreSusiDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("NoMoreSusi", throwIfV1Schema: false)
         {
-            this.Configuration.LazyLoadingEnabled = true;
+            Configuration.LazyLoadingEnabled = true;
         }
 
         public virtual IDbSet<Student> Students { get; set; }

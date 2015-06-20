@@ -38,6 +38,7 @@ namespace NoMoreSusi.Web.Controllers
 		}
 
 		[HttpPost]
+		[ValidateAntiForgeryTokenAttribute]
 		public ActionResult Add(AddRoomViewModel viewmodel)
 		{
 			if (ModelState.IsValid && viewmodel != null)
@@ -62,6 +63,7 @@ namespace NoMoreSusi.Web.Controllers
 		}
 
 		[HttpPost]
+		[ValidateAntiForgeryTokenAttribute]
 		public ActionResult Edit(EditRoomViewModel viewmodel)
 		{
 			if (ModelState.IsValid && viewmodel != null)
@@ -75,6 +77,16 @@ namespace NoMoreSusi.Web.Controllers
 			}
 
 			return View(viewmodel);
+		}
+
+		[HttpPost]
+		[ValidateAntiForgeryTokenAttribute]
+		public ActionResult Delete(int id)
+		{
+			Data.Rooms.Delete(id);
+			Data.SaveChanges();
+
+			return RedirectToAction("All");
 		}
 	}
 }

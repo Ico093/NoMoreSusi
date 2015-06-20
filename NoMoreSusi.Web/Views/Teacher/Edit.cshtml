@@ -1,0 +1,17 @@
+﻿@model NoMoreSusi.Web.ViewModels.Teachers.EditTeacherViewModel
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm("Edit", "Teacher", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div>
+        @Html.DisplayNameFor(s => s.Name)
+        @Html.EditorFor(s => s.Name)
+    </div>
+
+    <div>
+        @Html.SubmitButton("Save", new { @class = "btn btn-primary" })
+    </div>
+}

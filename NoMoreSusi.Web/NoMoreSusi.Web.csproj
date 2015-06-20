@@ -208,6 +208,9 @@
     <Compile Include="ViewModels\Students\EditStudentViewModel.cs" />
     <Compile Include="ViewModels\Students\StudentViewModel.cs" />
     <Compile Include="ViewModels\Students\StudentsViewModel.cs" />
+    <Compile Include="ViewModels\Teachers\EditTeacherViewModel.cs" />
+    <Compile Include="ViewModels\Teachers\TeachersViewModel.cs" />
+    <Compile Include="ViewModels\Teachers\TeacherViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\NoMoreSusi.mdf" />
@@ -284,12 +287,14 @@
     <Content Include="Views\Student\Add.cshtml" />
     <Content Include="Views\Student\All.cshtml" />
     <Content Include="Views\Student\Edit.cshtml" />
+    <Content Include="Views\Teacher\Edit.cshtml" />
+    <Content Include="Views\Teacher\All.cshtml" />
+    <Content Include="Views\Teacher\Add.cshtml" />
     <None Include="Views\Lecture\All.cshtml" />
     <Content Include="Views\Lecture\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Base\" />
-    <Folder Include="Views\Teacher\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

@@ -87,6 +87,8 @@ namespace NoMoreSusi.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(EditStudentViewModel viewModel)
         {
+            viewModel.Courses.Find(c => c.Text == viewModel.Course).Selected = true;
+
             if (ModelState.IsValid)
             {
                 var studentModel = Mapper.Map<Student>(viewModel);

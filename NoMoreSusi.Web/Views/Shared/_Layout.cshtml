@@ -14,18 +14,18 @@
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
-	            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-		            <span class="icon-bar"></span>
-		            <span class="icon-bar"></span>
-		            <span class="icon-bar"></span>
-	            </button>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
                 @Html.ActionLink("NoMoreSusi", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-					@if (User.IsInRole(GlobalConstants.AdminRoleName))
-					{
-						<li class="dropdown">
+                    @if (User.IsInRole(GlobalConstants.AdminRoleName))
+                    {
+                        <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Students<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
                                 <li>@Html.ActionLink("All Students", "All", "Student")</li>
@@ -33,12 +33,19 @@
                             </ul>
                         </li>
                         <li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Rooms<span class="caret"></span></a>
-							<ul class="dropdown-menu" role="menu">
-								<li>@Html.ActionLink("All Rooms", "All", "Room")</li>
-								<li>@Html.ActionLink("Add Room", "Add", "Room")</li>
-							</ul>
-						</li>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Teachers<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>@Html.ActionLink("All Teachers", "All", "Teacher")</li>
+                                <li>@Html.ActionLink("Add Teacher", "Add", "Teacher")</li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Rooms<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>@Html.ActionLink("All Rooms", "All", "Room")</li>
+                                <li>@Html.ActionLink("Add Room", "Add", "Room")</li>
+                            </ul>
+                        </li>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Lectures<span class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu">
@@ -46,7 +53,7 @@
 								<li>@Html.ActionLink("Add Lecture", "Add", "Lecture")</li>
 							</ul>
 						</li>
-					}
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

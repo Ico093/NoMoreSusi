@@ -17,7 +17,7 @@ namespace NoMoreSusi.Models
 		public string UserId { get; set; }
 
 		[ForeignKey("UserId")]
-		public User User { get; set; }
+		public virtual User User { get; set; }
 
         public virtual ICollection<Lecture> Lectures { get; set; }
     }

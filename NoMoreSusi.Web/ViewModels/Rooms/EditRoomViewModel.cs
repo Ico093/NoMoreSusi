@@ -7,8 +7,10 @@ using NoMoreSusi.Web.Mapping;
 
 namespace NoMoreSusi.Web.ViewModels.Rooms
 {
-	public class AddRoomViewModel:IMapFrom<Room>,IHaveCustomMappings
+	public class EditRoomViewModel : IMapFrom<Room>, IHaveCustomMappings
 	{
+		public int Id { get; set; }
+
 		public Facultity Facultity { get; set; }
 
 		public int Number { get; set; }
@@ -19,7 +21,7 @@ namespace NoMoreSusi.Web.ViewModels.Rooms
 
 		public void CreateMappings(IConfiguration configuration)
 		{
-			configuration.CreateMap<Room, AddRoomViewModel>()
+			configuration.CreateMap<Room, EditRoomViewModel>()
 				.ForMember(m => m.Facultities, opt => opt.MapFrom(m => Enum.GetValues(typeof(Facultity)).Cast<Facultity>()));
 		}
 	}

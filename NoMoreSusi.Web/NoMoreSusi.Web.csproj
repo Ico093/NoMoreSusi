@@ -198,6 +198,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\Rooms\AddRoomViewModel.cs" />
+    <Compile Include="ViewModels\Rooms\EditRoomViewModel.cs" />
     <Compile Include="ViewModels\Rooms\RoomViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -269,6 +270,7 @@
     <Content Include="Views\Room\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\Student\" />
     <Folder Include="Views\Teacher\" />

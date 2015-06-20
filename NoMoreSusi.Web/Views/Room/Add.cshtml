@@ -21,7 +21,12 @@
 			<div class="row form-group">
 				<div class="col-md-6">
 					@Html.LabelFor(m => m.Facultity)
-					@Html.EditorFor(m => m.Facultity)
+					<select name="Facultity">
+						@foreach (var facultity in Model.Facultities)
+						{
+							<option value="@facultity">@facultity.ToString()</option>
+						}
+					</select>
 				</div>
 			</div>
 			<div class="row form-group">
@@ -31,5 +36,7 @@
 				</div>
 			</div>
 		</fieldset>
+
+		<input type="submit" name="name" value="Submit" class="btn btn-primary" />
 	}
 </div>

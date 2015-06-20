@@ -7,9 +7,9 @@
 <h2>@ViewBag.Title</h2>
 
 @{
-	var roomsRows = Model.Count / 3;
+	var roomsRows = Model.Count / 4;
 
-	if (Model.Count % 3 == 0)
+	if (Model.Count % 4 != 0)
 	{
 		roomsRows += 1;
 	}
@@ -19,19 +19,21 @@
 @for (int i = 0; i < roomsRows; i++)
 {
 	<div class="row">
-		@for (int j = 0; j < 3; j++)
+		@for (int j = 0; j < 4; j++)
 		{
-			if (3 * i + j == Model.Count)
+			if (4 * i + j == Model.Count)
 			{
 				break;
 			}
+			
+			var currentModel = Model[4 * i + j];
 
 			<div class="col-sm-4">
 				<div class="row">
-					<span>Facultity: @Model[3 * i + j].Facultity</span>
-					<span>Room: @Model[3 * i + j].Number</span>
-					<span>People count: @Model[3 * i + j].PeopleCount</span>
-					@Html.ActionLink("Edit", "Edit", "Room", new { id = Model[3 * i + j].Id }, new { @class = "btn btn-primary" })
+					<p>Facultity: @currentModel.Facultity</p>
+					<p>Room: @currentModel.Number</p>
+					<p>People count: @currentModel.PeopleCount</p>
+					@Html.ActionLink("Edit", "Edit", "Room", new { id = currentModel.Id }, new { @class = "btn btn-primary" })
 				</div>
 			</div>
 		}

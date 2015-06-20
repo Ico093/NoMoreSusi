@@ -1,4 +1,4 @@
-﻿@model NoMoreSusi.Web.ViewModels.Rooms.RoomViewModel
+﻿@model NoMoreSusi.Web.ViewModels.Rooms.EditRoomViewModel
 
 @{
 	ViewBag.Title = "Edit";
@@ -7,7 +7,7 @@
 <h2>@ViewBag.Title</h2>
 
 <div class="row">
-	using(@Html.BeginForm("Edit", "Room", FormMethod.Post, new { @class = "form-horizontal" }))
+	@using (Html.BeginForm("Edit", "Room", FormMethod.Post, new { @class = "form-horizontal" }))
 	{
 		@Html.AntiForgeryToken()
 		@Html.HiddenFor(m => m.Id)
@@ -22,7 +22,20 @@
 			<div class="row form-group">
 				<div class="col-md-6">
 					@Html.LabelFor(m => m.Facultity)
-					@Html.EditorFor(m => m.Facultity)
+					<select name="Facultity">
+						@foreach (var facultity in Model.Facultities)
+						{
+							if (facultity == Model.Facultity)
+							{
+								<option value="@facultity" selected="selected">@facultity.ToString()</option>
+
+							}
+							else
+							{
+								<option value="@facultity">@facultity.ToString()</option>
+							}
+						}
+					</select>
 				</div>
 			</div>
 			<div class="row form-group">
@@ -32,5 +45,7 @@
 				</div>
 			</div>
 		</fieldset>
+
+		<input type="submit" name="name" value="Submit" class="btn btn-primary" />
 	}
 </div>

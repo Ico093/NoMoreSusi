@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using AutoMapper;
-using NoMoreSusi.Models;
+﻿using NoMoreSusi.Models;
 using NoMoreSusi.Web.Mapping;
 
 namespace NoMoreSusi.Web.ViewModels.Rooms

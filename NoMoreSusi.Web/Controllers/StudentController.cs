@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
@@ -68,6 +70,44 @@ namespace NoMoreSusi.Web.Controllers
                 return RedirectToAction("All");
             }
             return View(viewModel);
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            var studentModel = Data.Students.GetById(id);
+            var viewModel = Mapper.Map<EditStudentViewModel>(studentModel);
+
+            viewModel.Courses.Find(c => c.Text == viewModel.Course).Selected = true;
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(EditStudentViewModel viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var studentModel = Mapper.Map<Student>(viewModel);
+
+                Data.Students.Update(studentModel);
+                Data.SaveChanges();
+
+                return RedirectToAction("All");
+            }
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id)
+        {
+            Data.Students.Delete(id);
+            Data.SaveChanges();
+
+            return RedirectToAction("All");
         }
     }
 }

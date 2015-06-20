@@ -1,22 +1,22 @@
-﻿@model NoMoreSusi.Web.ViewModels.Students.StudentViewModel
+﻿@model NoMoreSusi.Web.ViewModels.Students.EditStudentViewModel
 
-<h2>Add</h2>
+<h2>Edit</h2>
 
-@using (Html.BeginForm("Add", "Student", FormMethod.Post))
+@using (Html.BeginForm("Edit", "Student", FormMethod.Post))
 {
     <div>
         @Html.DisplayNameFor(s => s.UserName)
-        @Html.TextBoxFor(s => s.UserName)
+        @Html.EditorFor(s => s.UserName)
     </div>
 
     <div>
         @Html.DisplayNameFor(s => s.Name)
-        @Html.TextBoxFor(s => s.Name)
+        @Html.EditorFor(s => s.Name)
     </div>
 
     <div>
         @Html.DisplayNameFor(s => s.Email)
-        @Html.TextBoxFor(s => s.Email)
+        @Html.EditorFor(s => s.Email)
     </div>
 
     <div>

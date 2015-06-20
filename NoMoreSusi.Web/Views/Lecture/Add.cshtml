@@ -1,0 +1,51 @@
+﻿@model NoMoreSusi.Web.ViewModels.Lectures.AddLectureViewModel
+
+@{
+	ViewBag.Title = "Add Lecture";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="row">
+	@using (Html.BeginForm("Add", "Lecture", FormMethod.Post, new { @class = "form-horizontal" }))
+	{
+		@Html.AntiForgeryToken()
+
+		@Html.HiddenFor(m => m.TeacherId)
+		@Html.HiddenFor(m => m.RoomId)
+
+		<fieldset>
+			<div class="row form-group">
+				<div class="col-md-6">
+					@Html.LabelFor(m => m.Name)
+					@Html.EditorFor(m => m.Name)
+				</div>
+			</div>
+			<div class="row form-group">
+				<div class="col-md-6">
+					@Html.LabelFor(m => m.Day)
+					@Html.EditorFor(m => m.Day)
+				</div>
+			</div>
+			<div class="row form-group">
+				<div class="col-md-6">
+					@Html.LabelFor(m => m.Hour)
+					@Html.EditorFor(m => m.Hour)
+				</div>
+			</div>
+			<div class="row form-group">
+				<div class="col-md-6">
+					@Html.LabelFor(m => m.Length)
+					@Html.EditorFor(m => m.Length)
+				</div>
+			</div>
+			<div class="row form-group">
+				<div class="col-md-6">
+					@Html.LabelFor(m => m.Course)
+					@Html.EditorFor(m => m.Course)
+				</div>
+			</div>
+
+		</fieldset>
+	}
+</div>

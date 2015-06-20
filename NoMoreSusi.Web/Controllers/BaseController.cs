@@ -3,7 +3,6 @@ using NoMoreSusi.Data.Interfaces;
 
 namespace NoMoreSusi.Web.Controllers
 {
-    [Authorize]
     public class BaseController : Controller
     {
         private readonly INoMoreSusiData _data;

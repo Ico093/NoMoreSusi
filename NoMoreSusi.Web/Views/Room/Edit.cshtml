@@ -1,0 +1,36 @@
+﻿@model NoMoreSusi.Web.ViewModels.Rooms.RoomViewModel
+
+@{
+	ViewBag.Title = "Edit";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="row">
+	using(@Html.BeginForm("Edit", "Room", FormMethod.Post, new { @class = "form-horizontal" }))
+	{
+		@Html.AntiForgeryToken()
+		@Html.HiddenFor(m => m.Id)
+
+		<fieldset>
+			<div class="row form-group">
+				<div class="col-md-6">
+					@Html.LabelFor(m => m.Number)
+					@Html.EditorFor(m => m.Number)
+				</div>
+			</div>
+			<div class="row form-group">
+				<div class="col-md-6">
+					@Html.LabelFor(m => m.Facultity)
+					@Html.EditorFor(m => m.Facultity)
+				</div>
+			</div>
+			<div class="row form-group">
+				<div class="col-md-6">
+					@Html.LabelFor(m => m.PeopleCount)
+					@Html.EditorFor(m => m.PeopleCount)
+				</div>
+			</div>
+		</fieldset>
+	}
+</div>

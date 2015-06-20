@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using NoMoreSusi.Data.Interfaces;
+using NoMoreSusi.Web.ViewModels.Lectures;
 
 namespace NoMoreSusi.Web.Controllers
 {
@@ -10,10 +11,20 @@ namespace NoMoreSusi.Web.Controllers
         {
             
         }
-        // GET: Lecture
+
         public ActionResult Index()
         {
             return null;
         }
+
+		public ActionResult Add(int id)
+		{
+			var viewmodel = new AddLectureViewModel()
+			{
+				TeacherId = id
+			};
+
+			return View(viewmodel);
+		}
     }
 }

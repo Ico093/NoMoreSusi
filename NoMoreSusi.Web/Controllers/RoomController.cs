@@ -1,19 +1,79 @@
 ﻿using System.Web.Mvc;
+using AutoMapper;
 using NoMoreSusi.Data.Interfaces;
+using NoMoreSusi.Models;
+using NoMoreSusi.Web.ViewModels.Rooms;
+using System.Linq;
+using AutoMapper.QueryableExtensions;
 
 namespace NoMoreSusi.Web.Controllers
 {
-    public class RoomController : BaseController
-    {
-        public RoomController(INoMoreSusiData data)
-            :base(data)
-        {
-            
-        }
-        // GET: Room
-        public ActionResult Index()
-        {
-            return null;
-        }
-    }
+	[Authorize(Roles="Administrator")]
+	public class RoomController : BaseController
+	{
+		public RoomController(INoMoreSusiData data)
+			: base(data)
+		{
+
+		}
+
+		public ActionResult All()
+		{
+			var viewmodel = Data.Rooms
+				.All()
+				.Project()
+				.To<RoomViewModel>()
+				.ToList();
+
+			return View(viewmodel);
+		}
+
+		[HttpGet]
+		public ActionResult Add()
+		{
+			var viewmodel = new AddRoomViewModel();
+
+			return View(viewmodel);
+		}
+
+		[HttpPost]
+		public ActionResult Add(AddRoomViewModel viewmodel)
+		{
+			if (ModelState.IsValid && viewmodel != null)
+			{
+				var model = Mapper.Map<Room>(viewmodel);
+
+				Data.Rooms.Add(model);
+				Data.SaveChanges();
+
+				return RedirectToAction("All");
+			}
+
+			return View(viewmodel);
+		}
+
+		[HttpGet]
+		public ActionResult Edit(int id)
+		{
+			var viewmodel = Mapper.Map<RoomViewModel>( this.Data.Rooms.GetById(id));
+
+			return View(viewmodel);
+		}
+
+		[HttpPost]
+		public ActionResult Edit(RoomViewModel viewmodel)
+		{
+			if (ModelState.IsValid && viewmodel != null)
+			{
+				var model = Mapper.Map<Room>(viewmodel);
+
+				Data.Rooms.Update(model);
+				Data.SaveChanges();
+
+				return RedirectToAction("All");
+			}
+
+			return View(viewmodel);
+		}
+	}
 }

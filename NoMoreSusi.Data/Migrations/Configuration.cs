@@ -40,6 +40,7 @@ namespace NoMoreSusi.Data.Migrations
 			};
 
 			context.Roles.Add(role);
+			context.SaveChanges();
 		}
 
 		private void SeedUsers(NoMoreSusiDbContext context)
@@ -53,7 +54,8 @@ namespace NoMoreSusi.Data.Migrations
 				Email = "admin@admin.com"
 			};
 
-			var result = um.CreateAsync(user, "password").Result;
+			um.Create(user, "123456");
+			um.AddToRole(user.Id, "Administrator");
 		}
 
 		private void SeedRooms(NoMoreSusiDbContext context)

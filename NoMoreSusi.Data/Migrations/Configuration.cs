@@ -1,64 +1,71 @@
+using System;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using NoMoreSusi.Common;
 using NoMoreSusi.Models;
 
 namespace NoMoreSusi.Data.Migrations
 {
-	public sealed class Configuration : DbMigrationsConfiguration<NoMoreSusiDbContext>
-	{
-		public Configuration()
-		{
-			AutomaticMigrationsEnabled = true;
-			AutomaticMigrationDataLossAllowed = true;
-		}
+    public sealed class Configuration : DbMigrationsConfiguration<NoMoreSusiDbContext>
+    {
+        public Configuration()
+        {
+            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
+        }
 
-		protected override void Seed(NoMoreSusiDbContext context)
-		{
-			if (!context.Roles.Any())
-			{
-				SeedRoles(context);
-			}
+        protected override void Seed(NoMoreSusiDbContext context)
+        {
+            if (!context.Roles.Any())
+            {
+                SeedRoles(context);
+            }
 
-			if (!context.Users.Any() && context.Roles.Any())
-			{
-				SeedUsers(context);
-			}
+            if (!context.Users.Any() && context.Roles.Any())
+            {
+                SeedUsers(context);
+            }
 
-			if (!context.Rooms.Any())
-			{
-				SeedRooms(context);
-			}
-		}
+            base.Seed(context);
+        }
 
-		private void SeedRoles(NoMoreSusiDbContext context)
-		{
-			var role = new IdentityRole
-			{
-				Name = "Administrator",
-			};
+        private void SeedRoles(NoMoreSusiDbContext context)
+        {
+            var adminRole = new IdentityRole
+            {
+                Name = GlobalConstants.AdminRoleName,
+            };
 
-			context.Roles.Add(role);
-		}
+            var teacherRole = new IdentityRole
+            {
+                Name = GlobalConstants.TeacherRoleName,
+            };
 
-		private void SeedUsers(NoMoreSusiDbContext context)
-		{
-			var userStore = new UserStore<User>(context);
-			UserManager<User> um = new UserManager<User>(userStore);
+            var studentRole = new IdentityRole
+            {
+                Name = GlobalConstants.StudentRoleName,
+            };
 
-			var user = new User
-			{
-				UserName = "admin",
-				Email = "admin@admin.com"
-			};
+            context.Roles.Add(adminRole);
+            context.Roles.Add(teacherRole);
+            context.Roles.Add(studentRole);
+            context.SaveChanges();
+        }
 
-			var result = um.CreateAsync(user, "password").Result;
-		}
+        private void SeedUsers(NoMoreSusiDbContext context)
+        {
+            var userStore = new UserStore<User>(context);
+            UserManager<User> userManager = new UserManager<User>(userStore);
 
-		private void SeedRooms(NoMoreSusiDbContext context)
-		{
-			//just to check
-		}
-	}
+            var user = new User
+            {
+                UserName = GlobalConstants.AdminUserName,
+                Email = GlobalConstants.AdminEmail
+            };
+
+            userManager.Create(user, GlobalConstants.AdminPassword);
+        }
+    }
 }

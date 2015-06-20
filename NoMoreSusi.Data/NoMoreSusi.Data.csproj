@@ -64,12 +64,15 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\NoMoreSusi.Common\NoMoreSusi.Common.csproj">
+      <Project>{705f9796-b9d7-42db-8edb-23f7389b33d6}</Project>
+      <Name>NoMoreSusi.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NoMoreSusi.Models\NoMoreSusi.Models.csproj">
       <Project>{6fcea6ad-64b0-422c-8305-f556d18c5a1e}</Project>
       <Name>NoMoreSusi.Models</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

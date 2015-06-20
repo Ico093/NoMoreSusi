@@ -1,0 +1,12 @@
+﻿@model IEnumerable<NoMoreSusi.Web.ViewModels.Students.StudentsViewModel>
+
+<h2>All</h2>
+
+@foreach (var student in Model)
+{
+    <div>
+        <p>Name: @student.Name</p>
+        <p>Email: @student.Email</p>
+        <p>Course: @student.Course</p>
+    </div>
+}

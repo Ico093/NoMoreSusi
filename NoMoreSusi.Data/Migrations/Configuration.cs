@@ -66,6 +66,7 @@ namespace NoMoreSusi.Data.Migrations
 			};
 
             userManager.Create(user, GlobalConstants.AdminPassword);
+		    userManager.AddToRole(user.Id, GlobalConstants.AdminRoleName);
 		}
 	}
 }

@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using NoMoreSusi.Common
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -18,16 +19,18 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("NoMoreSusi", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-	                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
 
-					@if (User.IsInRole("Administrator"))
-					{
-						<li>@Html.ActionLink("Rooms", "All", "Room")</li>
-					}
+                    @if (User.IsInRole(GlobalConstants.AdminRoleName))
+                    {
+                        <li>@Html.ActionLink("Rooms", "All", "Room")</li>
+                        <li>@Html.ActionLink("Students", "All", "Student")</li>
+                        <li>@Html.ActionLink("Add Student", "Add", "Student")</li>
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -37,7 +40,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - NoMoreSusi</p>
         </footer>
     </div>
 

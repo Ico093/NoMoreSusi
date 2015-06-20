@@ -189,6 +189,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastrucutre\Filters\CustomErrorAttribute.cs" />
+    <Compile Include="Infrastrucutre\HtmlHelpers\CustomHtmlHelper.cs" />
     <Compile Include="Mapping\AutoMapperConfig.cs" />
     <Compile Include="Mapping\IHaveCustomMappings.cs" />
     <Compile Include="Mapping\IMapFrom.cs" />
@@ -199,8 +200,14 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\Rooms\AddRoomViewModel.cs" />
     <Compile Include="ViewModels\Rooms\RoomViewModel.cs" />
+    <Compile Include="ViewModels\Students\StudentViewModel.cs" />
+    <Compile Include="ViewModels\Students\StudentsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\NoMoreSusi.mdf" />
+    <Content Include="App_Data\NoMoreSusi_log.ldf">
+      <DependentUpon>NoMoreSusi.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\toastr.css" />
@@ -267,10 +274,11 @@
     <Content Include="Views\Room\Add.cshtml" />
     <Content Include="Views\Room\All.cshtml" />
     <Content Include="Views\Room\Edit.cshtml" />
+    <Content Include="Views\Student\Add.cshtml" />
+    <Content Include="Views\Student\All.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Base\" />
-    <Folder Include="Views\Student\" />
     <Folder Include="Views\Teacher\" />
   </ItemGroup>
   <ItemGroup>
@@ -307,7 +315,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>64259</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

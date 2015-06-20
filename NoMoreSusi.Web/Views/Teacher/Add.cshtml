@@ -1,0 +1,30 @@
+﻿@model NoMoreSusi.Web.ViewModels.Teachers.TeacherViewModel
+
+<h2>Add</h2>
+
+@using (Html.BeginForm("Add", "Teacher", FormMethod.Post))
+{
+    <div>
+        @Html.DisplayNameFor(s => s.UserName)
+        @Html.TextBoxFor(s => s.UserName)
+    </div>
+
+    <div>
+        @Html.DisplayNameFor(s => s.Name)
+        @Html.TextBoxFor(s => s.Name)
+    </div>
+
+    <div>
+        @Html.DisplayNameFor(s => s.Email)
+        @Html.TextBoxFor(s => s.Email)
+    </div>
+
+    <div>
+        @Html.DisplayNameFor(s => s.Password)
+        @Html.PasswordFor(s => s.Password)
+    </div>
+
+    <div>
+        @Html.SubmitButton("Save", new { @class = "btn btn-primary" })
+    </div>
+}

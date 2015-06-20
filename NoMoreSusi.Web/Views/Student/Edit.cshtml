@@ -4,24 +4,11 @@
 
 @using (Html.BeginForm("Edit", "Student", FormMethod.Post))
 {
-    <div>
-        @Html.DisplayNameFor(s => s.UserName)
-        @Html.EditorFor(s => s.UserName)
-    </div>
-
+    @Html.AntiForgeryToken()
+    
     <div>
         @Html.DisplayNameFor(s => s.Name)
         @Html.EditorFor(s => s.Name)
-    </div>
-
-    <div>
-        @Html.DisplayNameFor(s => s.Email)
-        @Html.EditorFor(s => s.Email)
-    </div>
-
-    <div>
-        @Html.DisplayNameFor(s => s.Password)
-        @Html.PasswordFor(s => s.Password)
     </div>
 
     <div>

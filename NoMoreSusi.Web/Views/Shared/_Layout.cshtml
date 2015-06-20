@@ -31,6 +31,13 @@
 								<li>@Html.ActionLink("Add Room", "Add", "Room")</li>
 							</ul>
 						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Lectures<span class="caret"></span></a>
+							<ul class="dropdown-menu" role="menu">
+								<li>@Html.ActionLink("All Lectures", "All", "Lecture")</li>
+								<li>@Html.ActionLink("Add Lecture", "Add", "Lecture")</li>
+							</ul>
+						</li>
 					}
                 </ul>
                 @Html.Partial("_LoginPartial")

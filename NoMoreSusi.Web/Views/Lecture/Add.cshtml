@@ -1,4 +1,4 @@
-﻿@model NoMoreSusi.Web.ViewModels.Lectures.AddLectureViewModel
+﻿@model NoMoreSusi.Web.ViewModels.Lectures.AddLectureForPageViewModel
 
 @{
 	ViewBag.Title = "Add Lecture";
@@ -7,45 +7,114 @@
 <h2>@ViewBag.Title</h2>
 
 <div class="row">
-	@using (Html.BeginForm("Add", "Lecture", FormMethod.Post, new { @class = "form-horizontal" }))
+	@using (Html.BeginForm("Add", "Lecture", FormMethod.Post, new {@class = "form-horizontal"}))
 	{
 		@Html.AntiForgeryToken()
 
-		@Html.HiddenFor(m => m.TeacherId)
-		@Html.HiddenFor(m => m.RoomId)
+		@Html.HiddenFor(m => m.AddLectureViewModel.TeacherId)
+		@Html.HiddenFor(m => m.AddLectureViewModel.RoomId, new{id="hiddenForRoomId"})
 
 		<fieldset>
 			<div class="row form-group">
 				<div class="col-md-6">
-					@Html.LabelFor(m => m.Name)
-					@Html.EditorFor(m => m.Name)
+					@Html.LabelFor(m => m.AddLectureViewModel.Name)
+					@Html.EditorFor(m => m.AddLectureViewModel.Name)
 				</div>
 			</div>
 			<div class="row form-group">
 				<div class="col-md-6">
-					@Html.LabelFor(m => m.Day)
-					@Html.EditorFor(m => m.Day)
-				</div>
-			</div>
-			<div class="row form-group">
-				<div class="col-md-6">
-					@Html.LabelFor(m => m.Hour)
-					@Html.EditorFor(m => m.Hour)
-				</div>
-			</div>
-			<div class="row form-group">
-				<div class="col-md-6">
-					@Html.LabelFor(m => m.Length)
-					@Html.EditorFor(m => m.Length)
-				</div>
-			</div>
-			<div class="row form-group">
-				<div class="col-md-6">
-					@Html.LabelFor(m => m.Course)
-					@Html.EditorFor(m => m.Course)
-				</div>
-			</div>
+					@Html.LabelFor(m => m.AddLectureViewModel.Day)
+					<select name="Day">
+						@foreach (var date in Model.Dates)
+						{
+							var facultityValue = (int)date;
 
+							<option value="@facultityValue">@date</option>
+						}
+					</select>
+				</div>
+			</div>
+			<div class="row form-group">
+				<div class="col-md-6">
+					@Html.LabelFor(m => m.AddLectureViewModel.Hour)
+					@Html.EditorFor(m => m.AddLectureViewModel.Hour)
+				</div>
+			</div>
+			<div class="row form-group">
+				<div class="col-md-6">
+					@Html.LabelFor(m => m.AddLectureViewModel.Length)
+					@Html.EditorFor(m => m.AddLectureViewModel.Length)
+				</div>
+			</div>
+			<div class="row form-group">
+				<div class="col-md-6">
+					@Html.LabelFor(m => m.AddLectureViewModel.Course)
+					<select>
+						@foreach (var course in Model.Courses)
+						{
+							<option value="@course">@course.ToString()</option>
+						}
+					</select>
+				</div>
+			</div>
+			<div class="row form-group">
+				<div class="col-md-6">
+					@Html.LabelFor(m => m.Facultities)
+					<select id="facultities">
+						@foreach (var facultity in Model.Facultities)
+						{
+							var facultityValue = (int) facultity;
+							
+							<option value="@facultityValue">@facultity</option>
+						}
+					</select>
+				</div>
+			</div>
+			<div class="row form-group">
+				<div class="col-md-6">
+					@Html.LabelFor(m => m.Rooms)
+					<select id="rooms">
+						@foreach (var room in Model.Rooms)
+						{
+							<option value="@room.Id">@room.Number</option>
+						}
+					</select>
+				</div>
+			</div>
 		</fieldset>
 	}
 </div>
+
+@section scripts
+{
+	<script>
+		var facultity = $("#facultities");
+		var rooms = $("#rooms");
+		var roomId = $("#hiddenForRoomId");
+
+		function updateRoomId() {
+			roomId.val(rooms.val());
+		}
+
+		function updateRooms() {
+			$.post("RoomsForFacultity/" + facultity.val(), function (data) {
+				rooms.empty();
+
+				$.each(data, function (index, value) {
+					var option = $("<option></option>");
+					option.val(value.Id);
+					option.text(value.Number);
+
+					rooms.append(option);
+				});
+
+				updateRoomId();
+			});
+		}
+
+		facultity.on("change", updateRooms);
+		rooms.on("change", updateRoomId);
+
+		updateRoomId();
+	</script>
+}

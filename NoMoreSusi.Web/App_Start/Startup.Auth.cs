@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Data.Entity;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
-using Microsoft.Owin.Security.Google;
 using NoMoreSusi.Data;
 using NoMoreSusi.Models;
 using Owin;
-using NoMoreSusi.Web.ViewModels;
 
 namespace NoMoreSusi.Web
 {

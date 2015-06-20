@@ -1,11 +1,11 @@
-﻿namespace NoMoreSusi.Data.Repository
-{
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Infrastructure;
-    using System.Linq;
+﻿using System;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Linq;
 
-    public class GenericRepository<T> : IRepository<T> where T : class
+namespace NoMoreSusi.Data.Repository
+{
+	public class GenericRepository<T> : IRepository<T> where T : class
     {
         public GenericRepository(DbContext context)
         {

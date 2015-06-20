@@ -1,8 +1,8 @@
-﻿namespace NoMoreSusi.Web.Mapping
-{
-    using AutoMapper;
+﻿using AutoMapper;
 
-    public interface IHaveCustomMappings
+namespace NoMoreSusi.Web.Mapping
+{
+	public interface IHaveCustomMappings
     {
         void CreateMappings(IConfiguration configuration);
     }

@@ -1,13 +1,25 @@
 ﻿using System.Data.Entity;
+using NoMoreSusi.Data.Repository;
+using NoMoreSusi.Models;
 
 namespace NoMoreSusi.Data.Interfaces
 {
-    public interface INoMoreSusiData
-    {
-        DbContext Context { get; }
+	public interface INoMoreSusiData
+	{
+		IRepository<User> Users { get; }
 
-        int SaveChanges();
+		IRepository<Lecture> Lectures { get; }
 
-        void Dispose();
-    }
+		IRepository<Student> Students { get; }
+
+		IRepository<Room> Rooms { get; }
+
+		IRepository<Teacher> Teachers { get; }
+
+		DbContext Context { get; }
+
+		int SaveChanges();
+
+		void Dispose();
+	}
 }

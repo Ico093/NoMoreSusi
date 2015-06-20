@@ -1,4 +1,4 @@
-﻿@model System.Web.Mvc.HandleErrorInfo
+﻿@model HandleErrorInfo
 
 @{
     ViewBag.Title = "Error";
@@ -7,3 +7,15 @@
 <h1 class="text-danger">Error.</h1>
 <h2 class="text-danger">An error occurred while processing your request.</h2>
 
+@{
+	if (Request.IsLocal)
+	{
+		if (Model != null && HttpContext.Current.IsDebuggingEnabled)
+		{
+			<p class="text-muted">Controller name: @Model.ControllerName</p>
+			<p class="text-muted">Action name: @Model.ActionName</p>
+			<p class="text-primary">Message: @Model.Exception.Message</p>
+			<div class="text-danger">StackTrace: @Model.Exception.StackTrace</div>
+		}
+	}
+}

@@ -1,8 +1,8 @@
-﻿namespace NoMoreSusi.Data.Repository
-{
-    using System.Linq;
+﻿using System.Linq;
 
-    public interface IRepository<T> where T : class
+namespace NoMoreSusi.Data.Repository
+{
+	public interface IRepository<T> where T : class
     {
         IQueryable<T> All();
 

@@ -1,7 +1,8 @@
 ﻿using Microsoft.Owin;
+using NoMoreSusi.Web;
 using Owin;
 
-[assembly: OwinStartupAttribute(typeof(NoMoreSusi.Web.Startup))]
+[assembly: OwinStartup(typeof(Startup))]
 namespace NoMoreSusi.Web
 {
     public partial class Startup

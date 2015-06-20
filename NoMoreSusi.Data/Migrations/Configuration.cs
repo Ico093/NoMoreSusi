@@ -1,12 +1,11 @@
+using System.Data.Entity.Migrations;
+using System.Linq;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using NoMoreSusi.Models;
 
 namespace NoMoreSusi.Data.Migrations
 {
-	using System.Data.Entity.Migrations;
-	using System.Linq;
-
 	public sealed class Configuration : DbMigrationsConfiguration<NoMoreSusiDbContext>
 	{
 		public Configuration()

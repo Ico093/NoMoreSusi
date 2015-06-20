@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using NoMoreSusi.Web.Infrastrucutre.Filters;
 
 namespace NoMoreSusi.Web
 {
@@ -6,7 +7,7 @@ namespace NoMoreSusi.Web
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
-            //filters.Add(new HandleErrorAttribute());
+			filters.Add(new CustomErrorAttribute());
         }
     }
 }

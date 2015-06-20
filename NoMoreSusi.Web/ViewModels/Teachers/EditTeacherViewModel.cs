@@ -12,6 +12,7 @@ namespace NoMoreSusi.Web.ViewModels.Teachers
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public string UserId { get; set; }
         public void CreateMappings(IConfiguration configuration)
         {
         }

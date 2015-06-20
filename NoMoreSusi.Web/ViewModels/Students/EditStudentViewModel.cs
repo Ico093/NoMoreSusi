@@ -16,6 +16,7 @@ namespace NoMoreSusi.Web.ViewModels.Students
         }
 
         public int Id { get; set; }
+        public string UserId { get; set; }
         public string Name { get; set; }
         public string Course { get; set; }
         public List<SelectListItem> Courses { get; set; }

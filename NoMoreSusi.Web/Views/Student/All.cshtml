@@ -1,0 +1,20 @@
+﻿@model IEnumerable<NoMoreSusi.Web.ViewModels.Students.StudentsViewModel>
+
+<h2>All</h2>
+<div class="row">
+    @foreach (var student in Model)
+    {
+        <div class="col-sm-4">
+            <p>Name: @student.Name</p>
+            <p>Email: @student.Email</p>
+            <p>Course: @student.Course</p>
+
+            @using (Html.BeginForm("Delete", "Student", new { id = student.Id }, FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ActionLink("Edit", "Edit", "Student", new { id = student.Id }, new { @class = "btn btn-primary" })
+                @Html.SubmitButton("Delete", new { @class="btn btn-danger" })
+            }
+        </div>
+    }
+</div>

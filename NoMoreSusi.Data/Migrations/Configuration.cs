@@ -65,7 +65,7 @@ namespace NoMoreSusi.Data.Migrations
                 Email = GlobalConstants.AdminEmail
 			};
 
-			userManager.Create(user, GlobalConstants.AdminPassword);
+            userManager.Create(user, GlobalConstants.AdminPassword);
 			userManager.AddToRole(user.Id, GlobalConstants.AdminRoleName);
 		}
 	}

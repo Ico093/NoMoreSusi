@@ -2,74 +2,82 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Styles.Render("~/Content/toastr")
-    @Scripts.Render("~/bundles/modernizr")
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>@ViewBag.Title - My ASP.NET Application</title>
+	@Styles.Render("~/Content/css")
+	@Styles.Render("~/Content/toastr")
+	@Scripts.Render("~/bundles/modernizr")
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("NoMoreSusi", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    @if (User.IsInRole(GlobalConstants.AdminRoleName))
-                    {
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Students<span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li>@Html.ActionLink("All Students", "All", "Student")</li>
-                                <li>@Html.ActionLink("Add Student", "Add", "Student")</li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Teachers<span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li>@Html.ActionLink("All Teachers", "All", "Teacher")</li>
-                                <li>@Html.ActionLink("Add Teacher", "Add", "Teacher")</li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Rooms<span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li>@Html.ActionLink("All Rooms", "All", "Room")</li>
-                                <li>@Html.ActionLink("Add Room", "Add", "Room")</li>
-                            </ul>
-                        </li>
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				@Html.ActionLink("NoMoreSusi", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					@if (User.IsInRole(GlobalConstants.AdminRoleName) || User.IsInRole(GlobalConstants.TeacherRoleName) || User.IsInRole(GlobalConstants.StudentRoleName))
+					{
+						if (User.IsInRole(GlobalConstants.AdminRoleName) || User.IsInRole(GlobalConstants.TeacherRoleName))
+						{
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Students<span class="caret"></span></a>
+								<ul class="dropdown-menu" role="menu">
+									<li>@Html.ActionLink("All Students", "All", "Student")</li>
+									@if (User.IsInRole(GlobalConstants.AdminRoleName))
+									{
+										<li>@Html.ActionLink("Add Student", "Add", "Student")</li>
+									}
+								</ul>
+							</li>
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Rooms<span class="caret"></span></a>
+								<ul class="dropdown-menu" role="menu">
+									<li>@Html.ActionLink("All Rooms", "All", "Room")</li>
+
+									@if (User.IsInRole(GlobalConstants.AdminRoleName))
+									{
+										<li>@Html.ActionLink("Add Room", "Add", "Room")</li>
+									}
+								</ul>
+							</li>
+						}
+
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Lectures<span class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu">
 								<li>@Html.ActionLink("All Lectures", "All", "Lecture")</li>
-								<li>@Html.ActionLink("Add Lecture", "Add", "Lecture")</li>
+
+								@if (User.IsInRole(GlobalConstants.TeacherRoleName))
+								{
+									<li>@Html.ActionLink("Add Lecture", "Add", "Lecture")</li>
+								}
 							</ul>
 						</li>
-                    }
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
-        </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - NoMoreSusi</p>
-        </footer>
-    </div>
+					}
+				</ul>
+				@Html.Partial("_LoginPartial")
+			</div>
+		</div>
+	</div>
+	<div class="container body-content">
+		@RenderBody()
+		<hr />
+		<footer>
+			<p>&copy; @DateTime.Now.Year - NoMoreSusi</p>
+		</footer>
+	</div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/toastr")
-    @RenderSection("scripts", required: false)
+	@Scripts.Render("~/bundles/jquery")
+	@Scripts.Render("~/bundles/bootstrap")
+	@Scripts.Render("~/bundles/toastr")
+	@RenderSection("scripts", required: false)
 </body>
 </html>

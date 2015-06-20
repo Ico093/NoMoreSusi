@@ -91,7 +91,7 @@
 		var rooms = $("#rooms");
 
 		function updateRooms() {
-			$.post("RoomsForFacultity/" + facultity.val(), function (data) {
+			$.post("/Lecture/RoomsForFacultity/" + facultity.val(), function (data) {
 				rooms.empty();
 
 				$.each(data, function (index, value) {

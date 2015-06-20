@@ -56,7 +56,8 @@ namespace NoMoreSusi.Web.Controllers
 			{
 				var model = Mapper.Map<Lecture>(viewmodel);
 
-				var teacher = Data.Teachers.All().FirstOrDefault(t => t.UserId == User.Identity.GetUserId());
+				var userId = User.Identity.GetUserId();
+				var teacher = Data.Teachers.All().FirstOrDefault(t => t.UserId == userId);
 
 				model.TeacherId = teacher.Id;
 
@@ -87,7 +88,7 @@ namespace NoMoreSusi.Web.Controllers
 		}
 
 		[HttpGet]
-		[Authorize(Roles = GlobalConstants.AdminRoleName + "," + GlobalConstants.TeacherRoleName)]
+		[Authorize(Roles = GlobalConstants.AdminRoleName + ", " + GlobalConstants.TeacherRoleName)]
 		public ActionResult Edit(int id)
 		{
 			var viewmodel = new EditLectureForPageViewModel()
@@ -103,12 +104,18 @@ namespace NoMoreSusi.Web.Controllers
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		[Authorize(Roles = GlobalConstants.AdminRoleName + "," + GlobalConstants.TeacherRoleName)]
+		[Authorize(Roles = GlobalConstants.AdminRoleName + ", " + GlobalConstants.TeacherRoleName)]
 		public ActionResult Edit(EditLectureViewModel viewmodel)
 		{
 			if (ModelState.IsValid && viewmodel != null)
 			{
-				var model = Mapper.Map<Lecture>(viewmodel);
+				var model = Data.Lectures.GetById(viewmodel.Id);
+
+				model.Name = viewmodel.Name;
+				model.Day = viewmodel.Day;
+				model.Hour = viewmodel.Hour;
+				model.Length = viewmodel.Length;
+				model.RoomId = viewmodel.RoomId;
 
 				Data.Lectures.Update(model);
 				Data.SaveChanges();
@@ -124,7 +131,7 @@ namespace NoMoreSusi.Web.Controllers
 		[Authorize(Roles = GlobalConstants.AdminRoleName)]
 		public ActionResult Delete(int id)
 		{
-			Data.Rooms.Delete(id);
+			Data.Lectures.Delete(id);
 			Data.SaveChanges();
 
 			return RedirectToAction("All");

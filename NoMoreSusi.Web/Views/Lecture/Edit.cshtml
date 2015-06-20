@@ -7,7 +7,7 @@
 <h2>@ViewBag.Title</h2>
 
 <div class="row">
-	@using (Html.BeginForm("Edit", "Room", FormMethod.Post, new { @class = "form-horizontal" }))
+	@using (Html.BeginForm("Edit", "Lecture", FormMethod.Post, new {@class = "form-horizontal"}))
 	{
 		@Html.AntiForgeryToken()
 
@@ -24,7 +24,7 @@
 					<select name="Day">
 						@foreach (var date in Model.Dates)
 						{
-							var facultityValue = (int)date;
+							var facultityValue = (int) date;
 
 							<option value="@facultityValue">@date</option>
 						}
@@ -49,7 +49,7 @@
 					<select id="facultities">
 						@foreach (var facultity in Model.Facultities)
 						{
-							var facultityValue = (int)facultity;
+							var facultityValue = (int) facultity;
 							if (facultity == Model.EditLectureViewModel.Facultity)
 							{
 								<option value="@facultityValue" selected="selected">@facultity</option>
@@ -81,7 +81,32 @@
 				</div>
 			</div>
 
-			@Html.SubmitButton("Submit", new { @class = "btn btn-primary" })
+			@Html.SubmitButton("Submit", new {@class = "btn btn-primary"})
 		</fieldset>
 	}
 </div>
+
+
+@section scripts
+{
+	<script>
+		var facultity = $("#facultities");
+		var rooms = $("#rooms");
+
+		function updateRooms() {
+			$.post("/Lecture/RoomsForFacultity/" + facultity.val(), function (data) {
+				rooms.empty();
+
+				$.each(data, function (index, value) {
+					var option = $("<option></option>");
+					option.val(value.Id);
+					option.text(value.Number);
+
+					rooms.append(option);
+				});
+			});
+		}
+
+		facultity.on("change", updateRooms);
+	</script>
+}

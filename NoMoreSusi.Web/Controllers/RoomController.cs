@@ -1,11 +1,10 @@
-﻿using System;
+﻿using System.Linq;
 using System.Web.Mvc;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using NoMoreSusi.Data.Interfaces;
 using NoMoreSusi.Models;
 using NoMoreSusi.Web.ViewModels.Rooms;
-using System.Linq;
-using AutoMapper.QueryableExtensions;
 
 namespace NoMoreSusi.Web.Controllers
 {
@@ -38,7 +37,7 @@ namespace NoMoreSusi.Web.Controllers
 		}
 
 		[HttpPost]
-		[ValidateAntiForgeryTokenAttribute]
+		[ValidateAntiForgeryToken]
 		public ActionResult Add(AddRoomViewModel viewmodel)
 		{
 			if (ModelState.IsValid && viewmodel != null)
@@ -63,7 +62,7 @@ namespace NoMoreSusi.Web.Controllers
 		}
 
 		[HttpPost]
-		[ValidateAntiForgeryTokenAttribute]
+		[ValidateAntiForgeryToken]
 		public ActionResult Edit(EditRoomViewModel viewmodel)
 		{
 			if (ModelState.IsValid && viewmodel != null)
@@ -80,7 +79,7 @@ namespace NoMoreSusi.Web.Controllers
 		}
 
 		[HttpPost]
-		[ValidateAntiForgeryTokenAttribute]
+		[ValidateAntiForgeryToken]
 		public ActionResult Delete(int id)
 		{
 			Data.Rooms.Delete(id);

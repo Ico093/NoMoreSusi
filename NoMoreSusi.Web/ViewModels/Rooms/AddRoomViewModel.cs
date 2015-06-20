@@ -9,6 +9,11 @@ namespace NoMoreSusi.Web.ViewModels.Rooms
 {
 	public class AddRoomViewModel:IMapFrom<Room>,IHaveCustomMappings
 	{
+		public AddRoomViewModel()
+		{
+			Facultities = Enum.GetValues(typeof (Facultity)).Cast<Facultity>();
+		}
+
 		public Facultity Facultity { get; set; }
 
 		public int Number { get; set; }

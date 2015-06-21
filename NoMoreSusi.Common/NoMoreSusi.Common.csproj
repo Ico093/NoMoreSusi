@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DDay.iCal">
+      <HintPath>..\packages\DDay.iCal.1.0.2.575\lib\DDay.iCal.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web.Mvc, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -44,6 +47,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GlobalConstants.cs" />
+    <Compile Include="Helpers\CalendarFactory.cs" />
+    <Compile Include="Helpers\CalendarHelper.cs" />
     <Compile Include="Helpers\CoursesHelper.cs" />
     <Compile Include="Helpers\EnumToListHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -53,6 +58,9 @@
       <Project>{6FCEA6AD-64B0-422C-8305-F556D18C5A1E}</Project>
       <Name>NoMoreSusi.Models</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

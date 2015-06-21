@@ -28,10 +28,10 @@ namespace NoMoreSusi.Models
         public int RoomId { get; set; }
 
         [ForeignKey("TeacherId")]
-        public Teacher Teacher { get; set; }
+        public virtual Teacher Teacher { get; set; }
 
         [ForeignKey("RoomId")]
-        public Room Room { get; set; }
+        public virtual Room Room { get; set; }
 
         public virtual ICollection<Student> Students { get; set; }
     }

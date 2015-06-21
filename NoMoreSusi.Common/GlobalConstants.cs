@@ -9,5 +9,7 @@
 
         public const string TeacherRoleName = "Teacher";
         public const string StudentRoleName = "Student";
+
+        public const string SheduleExportFileName = "shedule.ics";
     }
 }

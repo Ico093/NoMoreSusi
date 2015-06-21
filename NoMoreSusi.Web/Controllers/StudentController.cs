@@ -7,6 +7,7 @@ using AutoMapper.QueryableExtensions;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using NoMoreSusi.Common;
+using NoMoreSusi.Common.Helpers;
 using NoMoreSusi.Data.Interfaces;
 using NoMoreSusi.Models;
 using NoMoreSusi.Web.ViewModels.Students;

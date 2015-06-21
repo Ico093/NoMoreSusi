@@ -58,6 +58,14 @@ namespace NoMoreSusi.Data
 			}
 		}
 
+		public IRepository<Shedule> Shedules
+		{
+			get
+			{
+				return this.GetRepository<Shedule>();
+			}
+		}
+
 		public DbContext Context
 		{
 			get

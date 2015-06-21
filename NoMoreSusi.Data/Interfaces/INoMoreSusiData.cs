@@ -16,6 +16,10 @@ namespace NoMoreSusi.Data.Interfaces
 
 		IRepository<Teacher> Teachers { get; }
 
+		IRepository<Shedule> Shedules { get; }
+
+		IRepository<Unsheduled> Unsheduleds { get; }
+
 		DbContext Context { get; }
 
 		int SaveChanges();

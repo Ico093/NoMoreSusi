@@ -60,6 +60,12 @@ namespace NoMoreSusi.Web.Controllers
 				var teacher = Data.Teachers.All().FirstOrDefault(t => t.UserId == userId);
 
 				model.TeacherId = teacher.Id;
+				var students = Data.Students.All().Where(s => s.Course == model.Course).ToList();
+
+				foreach (var student in students)
+				{
+					model.Students.Add(student);
+				}
 
 				Data.Lectures.Add(model);
 				Data.SaveChanges();
@@ -67,7 +73,16 @@ namespace NoMoreSusi.Web.Controllers
 				return RedirectToAction("All");
 			}
 
-			return View(viewmodel);
+			var viewmodelForPage = new AddLectureForPageViewModel()
+			{
+				AddLectureViewModel = viewmodel,
+				Dates = Enum.GetValues(typeof(DayOfWeek)).Cast<DayOfWeek>(),
+				Courses = Enum.GetValues(typeof(Course)).Cast<Course>(),
+				Facultities = Enum.GetValues(typeof(Facultity)).Cast<Facultity>(),
+				Rooms = Data.Rooms.All().Where(r => r.Facultity == (Facultity)1).Project().To<RoomViewModel>().ToList()
+			};
+
+			return View(viewmodelForPage);
 		}
 
 		[Authorize(Roles = GlobalConstants.TeacherRoleName)]
@@ -123,7 +138,15 @@ namespace NoMoreSusi.Web.Controllers
 				return RedirectToAction("All");
 			}
 
-			return View(viewmodel);
+			var viemodelForPage = new EditLectureForPageViewModel()
+			{
+				EditLectureViewModel = viewmodel,
+				Dates = Enum.GetValues(typeof(DayOfWeek)).Cast<DayOfWeek>(),
+				Facultities = Enum.GetValues(typeof(Facultity)).Cast<Facultity>(),
+				Rooms = Data.Rooms.All().Where(r => r.Facultity == (Facultity)1).Project().To<RoomViewModel>().ToList()
+			};
+
+			return View(viemodelForPage);
 		}
 
 		[HttpPost]

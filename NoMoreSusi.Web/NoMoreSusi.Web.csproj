@@ -190,6 +190,7 @@
     </Compile>
     <Compile Include="Infrastrucutre\Filters\CustomErrorAttribute.cs" />
     <Compile Include="Infrastrucutre\HtmlHelpers\CustomHtmlHelper.cs" />
+    <Compile Include="Infrastrucutre\SheduleConfigurator\SheduleConfigurator.cs" />
     <Compile Include="Mapping\AutoMapperConfig.cs" />
     <Compile Include="Mapping\IHaveCustomMappings.cs" />
     <Compile Include="Mapping\IMapFrom.cs" />

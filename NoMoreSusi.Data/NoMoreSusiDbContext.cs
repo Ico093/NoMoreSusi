@@ -16,6 +16,8 @@ namespace NoMoreSusi.Data
         public virtual IDbSet<Room> Rooms { get; set; }
         public virtual IDbSet<Lecture> Lectures { get; set; }
         public virtual IDbSet<Teacher> Teachers { get; set; }
+        public virtual IDbSet<Shedule> Shedules { get; set; }
+        public virtual IDbSet<Unsheduled> Unsheduleds { get; set; }
 
         public static NoMoreSusiDbContext Create()
         {

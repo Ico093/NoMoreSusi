@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="GlobalConstants.cs" />
     <Compile Include="Helpers\CoursesHelper.cs" />
+    <Compile Include="Helpers\EnumToListHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

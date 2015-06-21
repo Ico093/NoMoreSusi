@@ -56,8 +56,10 @@
     <Compile Include="Lecture.cs" />
     <Compile Include="Facultity.cs" />
     <Compile Include="Room.cs" />
+    <Compile Include="Shedule.cs" />
     <Compile Include="Student.cs" />
     <Compile Include="Teacher.cs" />
+    <Compile Include="Unsheduled.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

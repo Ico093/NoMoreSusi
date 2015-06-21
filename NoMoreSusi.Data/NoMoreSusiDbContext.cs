@@ -23,5 +23,20 @@ namespace NoMoreSusi.Data
         {
             return new NoMoreSusiDbContext();
         }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Shedule>()
+                .HasRequired<Room>(s => s.Room)
+                .WithMany()
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Shedule>()
+                .HasRequired<Lecture>(s => s.Lecture)
+                .WithMany()
+                .WillCascadeOnDelete(false);
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

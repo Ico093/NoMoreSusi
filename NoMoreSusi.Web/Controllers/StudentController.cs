@@ -64,6 +64,13 @@ namespace NoMoreSusi.Web.Controllers
 
                 studentModel.User = user;
 
+                var lectures = Data.Lectures.All().Where(l => l.Course == studentModel.Course);
+
+                foreach (var lecture in lectures)
+                {
+                    studentModel.Lectures.Add(lecture);
+                }
+
                 Data.Students.Add(studentModel);
                 Data.SaveChanges();
 
@@ -78,8 +85,6 @@ namespace NoMoreSusi.Web.Controllers
             var studentModel = Data.Students.GetById(id);
             var viewModel = Mapper.Map<EditStudentViewModel>(studentModel);
 
-            viewModel.Courses[2].Selected = true;
-
             return View(viewModel);
         }
 
@@ -89,7 +94,22 @@ namespace NoMoreSusi.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var studentModel = Mapper.Map<Student>(viewModel);
+                var studentModel = Data.Students.All().FirstOrDefault(s => s.Id == viewModel.Id);
+                var course = (Course) Enum.Parse(typeof (Course), viewModel.Course);
+
+                if (studentModel.Course != course)
+                {
+                    studentModel.Lectures = new List<Lecture>();
+
+                    var lectures = Data.Lectures.All().Where(l => l.Course == course);
+                    foreach (var lecture in lectures)
+                    {
+                        studentModel.Lectures.Add(lecture);
+                    }
+                }
+
+                studentModel.Name = viewModel.Name;
+                studentModel.Course = course;
 
                 Data.Students.Update(studentModel);
                 Data.SaveChanges();

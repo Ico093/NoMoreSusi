@@ -15,11 +15,10 @@ namespace NoMoreSusi.Models
 
 		public int RoomId { get; set; }
 
-
 		[ForeignKey("LectureId")]
-		public Lecture Lecture { get; set; }
+		public virtual Lecture Lecture { get; set; }
 
 		[ForeignKey("RoomId")]
-		public Room Room { get; set; }
+		public virtual Room Room { get; set; }
 	}
 }

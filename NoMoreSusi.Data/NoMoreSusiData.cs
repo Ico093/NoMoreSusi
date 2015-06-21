@@ -66,7 +66,9 @@ namespace NoMoreSusi.Data
 			}
 		}
 
-		public DbContext Context
+	    public IRepository<Unsheduled> Unsheduleds { get; private set; }
+
+	    public DbContext Context
 		{
 			get
 			{

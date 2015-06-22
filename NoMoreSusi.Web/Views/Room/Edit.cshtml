@@ -16,13 +16,13 @@
 			<div class="row form-group">
 				<div class="col-md-6">
 					@Html.LabelFor(m => m.Number)
-					@Html.EditorFor(m => m.Number)
+					@Html.EditorFor(m => m.Number, new { htmlAttributes = new { @class="form-control"}})
 				</div>
 			</div>
 			<div class="row form-group">
 				<div class="col-md-6">
 					@Html.LabelFor(m => m.Facultity)
-					<select name="Facultity">
+					<select class="form-control" name="Facultity">
 						@foreach (var facultity in Model.Facultities)
 						{
 							if (facultity == Model.Facultity)
@@ -41,7 +41,7 @@
 			<div class="row form-group">
 				<div class="col-md-6">
 					@Html.LabelFor(m => m.PeopleCount)
-					@Html.EditorFor(m => m.PeopleCount)
+					@Html.EditorFor(m => m.PeopleCount, new { htmlAttributes = new { @class="form-control"}})
 				</div>
 			</div>
 		</fieldset>

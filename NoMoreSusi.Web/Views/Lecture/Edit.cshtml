@@ -15,13 +15,13 @@
 			<div class="row form-group">
 				<div class="col-md-6">
 					@Html.LabelFor(m => m.EditLectureViewModel.Name)
-					@Html.EditorFor(m => m.EditLectureViewModel.Name, String.Empty, "Name")
+					@Html.EditorFor(m => m.EditLectureViewModel.Name, String.Empty, "Name", new { htmlAttributes = new { @class="form-control"}})
 				</div>
 			</div>
 			<div class="row form-group">
 				<div class="col-md-6">
 					@Html.LabelFor(m => m.EditLectureViewModel.Day)
-					<select name="Day">
+					<select class="form-control" name="Day">
 						@foreach (var date in Model.Dates)
 						{
 							var facultityValue = (int) date;
@@ -34,19 +34,19 @@
 			<div class="row form-group">
 				<div class="col-md-6">
 					@Html.LabelFor(m => m.EditLectureViewModel.Hour)
-					@Html.EditorFor(m => m.EditLectureViewModel.Hour, String.Empty, "Hour")
+					@Html.EditorFor(m => m.EditLectureViewModel.Hour, String.Empty, "Hour", new { htmlAttributes = new { @class="form-control"}})
 				</div>
 			</div>
 			<div class="row form-group">
 				<div class="col-md-6">
 					@Html.LabelFor(m => m.EditLectureViewModel.Length)
-					@Html.EditorFor(m => m.EditLectureViewModel.Length, String.Empty, "Length")
+					@Html.EditorFor(m => m.EditLectureViewModel.Length, String.Empty, "Length", new { htmlAttributes = new { @class="form-control"}})
 				</div>
 			</div>
 			<div class="row form-group">
 				<div class="col-md-6">
 					@Html.LabelFor(m => m.Facultities)
-					<select id="facultities">
+					<select class="form-control" id="facultities">
 						@foreach (var facultity in Model.Facultities)
 						{
 							var facultityValue = (int) facultity;
@@ -65,7 +65,7 @@
 			<div class="row form-group">
 				<div class="col-md-6">
 					@Html.LabelFor(m => m.Rooms)
-					<select id="rooms" name="RoomId">
+					<select class="form-control" id="rooms" name="RoomId">
 						@foreach (var room in Model.Rooms)
 						{
 							if (room.Id == Model.EditLectureViewModel.RoomId)

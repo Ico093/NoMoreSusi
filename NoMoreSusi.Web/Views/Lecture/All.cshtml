@@ -28,9 +28,10 @@
 
 			var currentModel = Model[4 * i + j];
 
-			<div class="col-sm-4">
-				<div class="row">
-					<p>Name: @currentModel.Name</p>
+			<div class="col-sm-3">
+				<div class="panel panel-primary">
+					<p class="panel-heading">Name: @currentModel.Name</p>
+                    <div class="panel-body">
 					<p>Day: @currentModel.Day</p>
 					<p>Hour: @currentModel.Hour</p>
 					<p>Length: @currentModel.Length</p>
@@ -40,13 +41,14 @@
 					@using (Html.BeginForm("Delete", "Lecture", new { id = currentModel.Id }, FormMethod.Post, new { id = "deleteRoomForm" }))
 					{
 						@Html.AntiForgeryToken()
-						@Html.ActionLink("Edit", "Edit", "Lecture", new { id = currentModel.Id }, new { @class = "btn btn-primary" })
+						@Html.ActionLink("Edit", "Edit", "Lecture", new { id = currentModel.Id }, new { @class = "btn btn-sm btn-primary" })
 						
 						if (User.IsInRole(GlobalConstants.AdminRoleName))
 						{
-							<input id="deleteBtn" type="button" name="name" value="Delete" class="btn btn-danger" />
+							<input id="deleteBtn" type="button" name="name" value="Delete" class="btn btn-sm btn-danger" />
 						}
 					}
+                    </div>
 				</div>
 			</div>
 		}

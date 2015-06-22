@@ -28,18 +28,20 @@
 
 			var currentModel = Model[4 * i + j];
 
-			<div class="col-sm-4">
-				<div class="row">
-					<p>Facultity: @currentModel.Facultity</p>
+			<div class="col-sm-3">
+				<div class="panel panel-primary">
+					<p class="panel-heading">Facultity: @currentModel.Facultity</p>
+                    <div class="panel-body">
 					<p>Room: @currentModel.Number</p>
 					<p>People count: @currentModel.PeopleCount</p>
 
 					@using (Html.BeginForm("Delete", "Room", new { id = currentModel.Id }, FormMethod.Post, new{id="deleteRoomForm"}))
 					{
 						@Html.AntiForgeryToken()
-						@Html.ActionLink("Edit", "Edit", "Room", new { id = currentModel.Id }, new { @class = "btn btn-primary" })
-						<input id="deleteBtn" type="button" name="name" value="Delete" class="btn btn-danger" />
+						@Html.ActionLink("Edit", "Edit", "Room", new { id = currentModel.Id }, new { @class = "btn btn-sm btn-primary" })
+						<input id="deleteBtn" type="button" name="name" value="Delete" class="btn btn-sm btn-danger" />
 					}
+                    </div>
 				</div>
 			</div>
 		}

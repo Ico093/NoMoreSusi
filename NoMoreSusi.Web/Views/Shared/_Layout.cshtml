@@ -24,8 +24,6 @@
                 <ul class="nav navbar-nav">
                     @if (User.IsInRole(GlobalConstants.AdminRoleName) || User.IsInRole(GlobalConstants.TeacherRoleName) || User.IsInRole(GlobalConstants.StudentRoleName))
                     {
-                        <li>@Html.ActionLink("My Shedule", "MyShedule", "Shedule")</li>
-
                         if (User.IsInRole(GlobalConstants.AdminRoleName) || User.IsInRole(GlobalConstants.TeacherRoleName))
                         {
                             <li class="dropdown">

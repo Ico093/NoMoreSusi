@@ -4,17 +4,21 @@
 <div class="row">
     @foreach (var student in Model)
     {
-        <div class="col-sm-4">
-            <p>Name: @student.Name</p>
+        <div class="col-sm-3">
+        <div class="panel panel-primary">
+            <p class="panel-heading">Name: @student.Name</p>
+            <div class="panel-body">
             <p>Email: @student.Email</p>
             <p>Course: @student.Course</p>
 
             @using (Html.BeginForm("Delete", "Student", new { id = student.Id }, FormMethod.Post))
             {
                 @Html.AntiForgeryToken()
-                @Html.ActionLink("Edit", "Edit", "Student", new { id = student.Id }, new { @class = "btn btn-primary" })
-                @Html.SubmitButton("Delete", new { @class="btn btn-danger" })
+                @Html.ActionLink("Edit", "Edit", "Student", new { id = student.Id }, new { @class = "btn btn-sm btn-primary" })
+                @Html.SubmitButton("Delete", new { @class="btn btn-sm btn-danger" })
             }
+        </div>
+        </div>
         </div>
     }
 </div>

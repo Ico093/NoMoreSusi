@@ -7,36 +7,26 @@
 <h2>@ViewBag.Title</h2>
 
 <div class="row">
-	@using (Html.BeginForm("Add", "Room", FormMethod.Post, new { @class = "form-horizontal" }))
+	@using (Html.BeginForm("Add", "Room", FormMethod.Post))
 	{
 		@Html.AntiForgeryToken()
-
-		<fieldset>
 			<div class="row form-group">
-				<div class="col-md-6">
 					@Html.LabelFor(m => m.Number)
-					@Html.EditorFor(m => m.Number)
-				</div>
+					@Html.EditorFor(m => m.Number, new { htmlAttributes = new { @class="form-control"}})
 			</div>
 			<div class="row form-group">
-				<div class="col-md-6">
-					@Html.LabelFor(m => m.Facultity)
-					<select name="Facultity">
-						@foreach (var facultity in Model.Facultities)
-						{
-							<option value="@facultity">@facultity.ToString()</option>
-						}
-					</select>
-				</div>
+				@Html.LabelFor(m => m.Facultity)
+				<select class="form-control" name="Facultity">
+					@foreach (var facultity in Model.Facultities)
+					{
+						<option value="@facultity">@facultity.ToString()</option>
+					}
+				</select>
 			</div>
 			<div class="row form-group">
-				<div class="col-md-6">
 					@Html.LabelFor(m => m.PeopleCount)
-					@Html.EditorFor(m => m.PeopleCount)
-				</div>
+					@Html.EditorFor(m => m.PeopleCount, new { htmlAttributes = new { @class="form-control"}})
 			</div>
-		</fieldset>
-
 		@Html.SubmitButton("Submit", new { @class = "btn btn-primary" })
 	}
 </div>

@@ -4,24 +4,24 @@
 
 @using (Html.BeginForm("Add", "Teacher", FormMethod.Post))
 {
-    <div>
+    <div class="form-group">
         @Html.DisplayNameFor(s => s.UserName)
-        @Html.TextBoxFor(s => s.UserName)
+        @Html.TextBoxFor(s => s.UserName, new {@class = "form-control"})
     </div>
 
-    <div>
+    <div class="form-group">    
         @Html.DisplayNameFor(s => s.Name)
-        @Html.TextBoxFor(s => s.Name)
+        @Html.TextBoxFor(s => s.Name, new {@class = "form-control"})
     </div>
 
-    <div>
+    <div class="form-group">
         @Html.DisplayNameFor(s => s.Email)
-        @Html.TextBoxFor(s => s.Email)
+        @Html.TextBoxFor(s => s.Email, new {@class = "form-control"})
     </div>
 
-    <div>
+    <div class="form-group">
         @Html.DisplayNameFor(s => s.Password)
-        @Html.PasswordFor(s => s.Password)
+        @Html.PasswordFor(s => s.Password, new {@class = "form-control"})
     </div>
 
     <div>
